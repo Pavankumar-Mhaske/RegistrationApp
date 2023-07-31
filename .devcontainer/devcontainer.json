@@ -17,7 +17,8 @@
 				"mongodb.mongodb-vscode",
 				"GitHub.copilot",
 				"vscode-icons-team.vscode-icons",
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				"rangav.vscode-thunder-client"
 			]
 		}
 	},
