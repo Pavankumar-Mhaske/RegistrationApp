@@ -1,7 +1,6 @@
-
-import './App.css';
-import { Form } from './components/Form';
-import { UserList } from './components/UsersList';
+import "./App.css";
+import { Form } from "./components/Form";
+import { UserList } from "./components/UsersList";
 
 function App() {
   return (

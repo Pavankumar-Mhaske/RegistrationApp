@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export const UserList = () => {
+  const [userData, setUserData] = useState([]);
+  const fetchUserData = async () => {
+    const response = await axios.get("/getUsers");
+    console.log(response);
+
+    // if no users  are there please don't set the values
+    if (response.data.data.users.length > 0) {
+      setUserData(response.data.data.users);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  });
+
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
@@ -28,16 +44,19 @@ export const UserList = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="px-4 py-3">one</td>
-                <td className="px-4 py-3">two</td>
-                <td className="px-4 py-3">
-                  <button className="hover:text-green-500">Edit</button>
-                </td>
-                <td className="px-4 py-3 text-lg text-gray-900">
-                  <button className="hover:text-red-500">Delete</button>
-                </td>
-              </tr>
+              {userData &&
+                userData.map((user) => (
+                  <tr>
+                    <td className="px-4 py-3">{user.name}</td>
+                    <td className="px-4 py-3">{user.email}</td>
+                    <td className="px-4 py-3">
+                      <button className="hover:text-green-500">Edit</button>
+                    </td>
+                    <td className="px-4 py-3 text-lg text-gray-900">
+                      <button className="hover:text-red-500">Delete</button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

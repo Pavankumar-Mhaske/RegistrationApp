@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+// importing the axios
+import axios from "axios";
 
 export const Form = () => {
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  console.log(userName, userEmail);
+
+  // Function to send the data
+  const submitData = async () => {
+    const data = {
+      name: userName,
+      email: userEmail,
+    };
+
+    const res = await axios.post("/createUser", data);
+    console.log(res);
+  };
+
+  // To handle the default behaviour of the form
   const handleSubmit = (event) => {
     event.preventDefault();
+    // to submit the data
+    submitData();
+    // But Empty the previous Details
+    setUserName("");
+    setUserEmail("");
   };
 
   return (
@@ -30,6 +53,8 @@ export const Form = () => {
                       id="name"
                       name="name"
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      value={userName}
+                      onChange={(event) => setUserName(event.target.value)}
                     />
                   </div>
                 </div>
@@ -46,6 +71,8 @@ export const Form = () => {
                       id="email"
                       name="email"
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      value={userEmail}
+                      onChange={(event) => setUserEmail(event.target.value)}
                     />
                   </div>
                 </div>
