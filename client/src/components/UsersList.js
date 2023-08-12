@@ -15,7 +15,27 @@ export const UserList = () => {
 
   useEffect(() => {
     fetchUserData();
-  });
+  }, [userData]);
+
+  const handleEdit = async (user) => {
+    const userName = prompt("Enter the new name");
+    const userEmail = prompt("Enter the new email");
+
+    if (!userName || !userEmail) {
+      alert("Please enter the valid details");
+    }
+
+    const response = await axios.put(`/updateUser/${user._id}`, {
+      name: userName,
+      email: userEmail,
+    });
+    console.log(response);
+  };
+
+  const handleDelete = async (id) => {
+    const response = await axios.delete(`/deleteUser/${id}`);
+    console.log(response);
+  };
 
   return (
     <section className="text-gray-600 body-font">
@@ -50,10 +70,20 @@ export const UserList = () => {
                     <td className="px-4 py-3">{user.name}</td>
                     <td className="px-4 py-3">{user.email}</td>
                     <td className="px-4 py-3">
-                      <button className="hover:text-green-500">Edit</button>
+                      <button
+                        className="hover:text-green-500"
+                        onClick={() => handleEdit(user)}
+                      >
+                        Edit
+                      </button>
                     </td>
                     <td className="px-4 py-3 text-lg text-gray-900">
-                      <button className="hover:text-red-500">Delete</button>
+                      <button
+                        className="hover:text-red-500"
+                        onClick={() => handleDelete(user._id)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
