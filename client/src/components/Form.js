@@ -1,13 +1,13 @@
 import React from "react";
 
-
 export const Form = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
-
- 
   return (
     <div>
-      <form >
+      <form onSubmit={handleSubmit}>
         <section className="text-gray-600 body-font relative">
           <div className="container px-5 py-8 mx-auto">
             <div className="flex flex-col text-center w-full mb-6">
@@ -30,7 +30,6 @@ export const Form = () => {
                       id="name"
                       name="name"
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      
                     />
                   </div>
                 </div>
@@ -47,9 +46,6 @@ export const Form = () => {
                       id="email"
                       name="email"
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      
-                      
-                    
                     />
                   </div>
                 </div>
