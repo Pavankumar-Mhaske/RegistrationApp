@@ -1,5 +1,7 @@
+// Controller = Business Logic
+
 // Business logic for user related operations
-const User = require('../models/userModel.js');
+const User = require("../models/userModel.js");
 
 exports.home = (req, res) => {
   res.send("Hello World!");
@@ -34,7 +36,6 @@ exports.createUser = async (req, res) => {
   }
 };
 
-
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -52,28 +53,25 @@ exports.getUsers = async (req, res) => {
       error,
     });
   }
-};  // Business logic for user related operations
-
+}; // Business logic for user related operations
 
 // controller to update the user.
 exports.updateUser = async (req, res) => {
-
   try {
-    const user  = await User.findByIdAndUpdate(req.params.id, req.body);
+    const user = await User.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
       status: "success",
       data: {
         user,
       },
-      message:"User updated Successfully",
+      message: "User updated Successfully",
     });
   } catch (error) {
     res.status(400).json({
       status: "fail",
       message: error.message,
       error,
-      
-    });    
+    });
   }
 };
 
@@ -86,14 +84,13 @@ exports.deleteUser = async (req, res) => {
       data: {
         user,
       },
-      message:"User deleted Successfully",
-    });    
+      message: "User deleted Successfully",
+    });
   } catch (error) {
     res.status(400).json({
       status: "fail",
       message: error.message,
       error,
-    });  
+    });
   }
 };
-
