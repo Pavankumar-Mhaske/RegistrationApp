@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 // importing the axios
 import axios from "axios";
-const BASE_URL = "https://registrationapp-production.up.railway.app";
-export const Form = () => {
+import toast from "react-hot-toast";
+
+export const Form = ({ fetchUsersData, BASE_URL }) => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   console.log(userName, userEmail);
@@ -16,6 +17,10 @@ export const Form = () => {
 
     const res = await axios.post(`${BASE_URL}/createUser`, data);
     console.log(res);
+    if (res.data.success) {
+      toast.success("User created successfully");
+      fetchUsersData();
+    }
   };
 
   // To handle the default behaviour of the form

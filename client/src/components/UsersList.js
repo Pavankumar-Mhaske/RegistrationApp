@@ -1,42 +1,40 @@
 // UserList code
-import React, { useEffect, useState } from "react";
+
 import axios from "axios";
-const BASE_URL = "https://registrationapp-production.up.railway.app";
-export const UserList = () => {
-  const [userData, setUserData] = useState([]);
-  
-  const fetchUserData = async () => {
-    const response = await axios.get(`${BASE_URL}/getUsers`);
-    console.log(response);
+import toast from "react-hot-toast";
 
-    // if no users  are there please don't set the values
-    if (response.data.data.users.length > 0) {
-      setUserData(response.data.data.users);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, [userData]);
-
+export const UserList = ({ userData, fetchUsersData, BASE_URL }) => {
   const handleEdit = async (user) => {
-    const userName = prompt("Enter the new name");
-    const userEmail = prompt("Enter the new email");
+    try {
+      const userName = prompt("Enter the new name");
+      const userEmail = prompt("Enter the new email");
 
-    if (!userName || !userEmail) {
-      alert("Please enter the valid details");
+      if (!userName || !userEmail) {
+        toast.error("Please enter the valid details");
+      } else {
+        const response = await axios.put(`${BASE_URL}/updateUser/${user._id}`, {
+          name: userName,
+          email: userEmail,
+        });
+        console.log(response);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
-
-    const response = await axios.put(`${BASE_URL}/updateUser/${user._id}`, {
-      name: userName,
-      email: userEmail,
-    });
-    console.log(response);
   };
 
   const handleDelete = async (id) => {
-    const response = await axios.delete(`${BASE_URL}/deleteUser/${id}`);
-    console.log(response);
+    try {
+      const response = await axios.delete(`${BASE_URL}/deleteUser/${id}`);
+      console.log(response);
+
+      if (response.data.success) {
+        toast.success("User deleted successfully");
+        fetchUsersData();
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
