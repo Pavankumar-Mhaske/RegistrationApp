@@ -1,11 +1,11 @@
 // UserList code
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+const BASE_URL = "https://registrationapp-production.up.railway.app";
 export const UserList = () => {
   const [userData, setUserData] = useState([]);
   const fetchUserData = async () => {
-    const response = await axios.get("/getUsers");
+    const response = await axios.get(`${BASE_URL}/getUsers`);
     console.log(response);
 
     // if no users  are there please don't set the values
@@ -26,7 +26,7 @@ export const UserList = () => {
       alert("Please enter the valid details");
     }
 
-    const response = await axios.put(`/updateUser/${user._id}`, {
+    const response = await axios.put(`${BASE_URL}/updateUser/${user._id}`, {
       name: userName,
       email: userEmail,
     });
@@ -34,7 +34,7 @@ export const UserList = () => {
   };
 
   const handleDelete = async (id) => {
-    const response = await axios.delete(`/deleteUser/${id}`);
+    const response = await axios.delete(`${BASE_URL}/deleteUser/${id}`);
     console.log(response);
   };
 

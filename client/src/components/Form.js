@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // importing the axios
 import axios from "axios";
-
+const BASE_URL = "https://registrationapp-production.up.railway.app";
 export const Form = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -14,7 +14,7 @@ export const Form = () => {
       email: userEmail,
     };
 
-    const res = await axios.post("/createUser", data);
+    const res = await axios.post(`${BASE_URL}/createUser`, data);
     console.log(res);
   };
 
