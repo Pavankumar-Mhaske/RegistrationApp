@@ -4,6 +4,7 @@ import axios from "axios";
 const BASE_URL = "https://registrationapp-production.up.railway.app";
 export const UserList = () => {
   const [userData, setUserData] = useState([]);
+  
   const fetchUserData = async () => {
     const response = await axios.get(`${BASE_URL}/getUsers`);
     console.log(response);
