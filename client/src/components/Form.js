@@ -17,7 +17,7 @@ export const Form = ({ fetchUsersData, BASE_URL }) => {
 
     const res = await axios.post(`${BASE_URL}/createUser`, data);
     console.log(res);
-    if (res.data.success) {
+    if (res.data.data.status === "success") {
       toast.success("User created successfully");
       fetchUsersData();
     }
