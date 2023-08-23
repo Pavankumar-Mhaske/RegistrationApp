@@ -10,16 +10,20 @@ export const Form = ({ fetchUsersData, BASE_URL }) => {
 
   // Function to send the data
   const submitData = async () => {
-    const data = {
-      name: userName,
-      email: userEmail,
-    };
+    try {
+      const data = {
+        name: userName,
+        email: userEmail,
+      };
 
-    const res = await axios.post(`${BASE_URL}/createUser`, data);
-    console.log(res);
-    if (res.data.data.status === "success") {
-      toast.success("User created successfully");
-      fetchUsersData();
+      const res = await axios.post(`${BASE_URL}/createUser`, data);
+      console.log(res);
+      if (res.data.data.status === "success") {
+        toast.success("User created successfully");
+        fetchUsersData();
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 
